@@ -1,0 +1,88 @@
+<div layout="column" class="md-inline-form">
+<md-content layout-padding>
+	<form id="frmSwimmingPool" ng-submit="$ctrl.modifyPool($ctrl.pool)">
+		<div layout-gt-xs="row">
+			<md-input-container class="md-block" flex="50">
+				<label>Name</label>
+				<input required ng-model="$ctrl.pool.name"/>
+			</md-input-container>
+			<md-input-container class="md-block" flex="50">
+				<label>Owner Name</label>
+				<input ng-model="$ctrl.pool.poolOwner" />
+			</md-input-container>
+		</div>
+			<md-input-container class="md-block">
+				<label>Picture</label>
+				<input ng-model="$ctrl.pool.image" />
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Street Address</label>
+				<input ng-model="$ctrl.pool.address.street" />
+			</md-input-container>
+		<div layout-gt-sm="row">
+			<md-input-container class="md-block" flex="60">
+				<label>City</label>
+				<input ng-model="$ctrl.pool.address.city" />
+			</md-input-container>
+			<md-input-container flex="20">
+				<label>State</label>
+				<md-select ng-model="$ctrl.pool.address.state">
+					<md-option><em>None</em></md-option>
+					<md-option ng-repeat="state in $ctrl.states" ng-value="state.abbrev">
+						{{state.abbrev}}
+					</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block" flex="20">
+				<label>Zip Code</label>
+				<input ng-model="$ctrl.pool.address.zipcode" />
+			</md-input-container>
+		</div>
+</md-content>
+<h2>Pool Details</h2>
+<md-content layout-gt-sm="row" layout-padding>
+	<md-input-container class="md-block" flex="25">
+		<label>Size in Gallons</label>
+		<input ng-model="$ctrl.pool.size" type="number"/>
+	</md-input-container>
+	<md-input-container class="md-block" flex="25">
+		<label>Pool Surface</label>
+		<md-select ng-model="$ctrl.pool.type">
+			<md-option ng-repeat="surfaceType in $ctrl.poolSurfaces" ng-value="surfaceType">
+				{{surfaceType}}
+			</md-option>
+		</md-select>
+	</md-input-container>
+	<md-input-container class="md-block" flex="25">
+		<label>Chlorine Source</label>
+		<md-select ng-model="$ctrl.pool.chlorineSource">
+			<md-option ng-repeat="chlorineSource in $ctrl.chlorineTypes" ng-value="chlorineSource">
+				{{chlorineSource}}
+			</md-option>
+		</md-select>
+	</md-input-container>
+	<md-input-container flex="25">
+		<label>Last Filter Cleaning</label>
+		<md-datepicker ng-model="$ctrl.pool.lastFilterChange"></md-datepicker>
+	</md-input-container>
+</md-content>
+<h3>Target Levels</h3>
+<md-content layout="row" layout-padding>
+	<md-slider-container flex ng-repeat="poolTest in $ctrl.poolTests">
+		<md-input-container>
+			<input flex type="number" ng-model="$ctrl.pool.targets[poolTest.id]" 
+				  step="{{ poolTest.increment }}" aria-controls="{{poolTest.id}}-slider" aria-label="{{poolTest.id}}"/>
+		</md-input-container>
+		<md-slider ng-model="$ctrl.pool.targets[poolTest.id]" min="{{ poolTest.minLevel }}" max="{{ poolTest.maxLevel }}" 
+			step="{{ poolTest.increment}}"
+			aria-label="fca" id="fca-slider" class="md-accent" md-vertical md-range md-discrete>
+		</md-slider>
+		<h5>{{poolTest.name}}</h5>
+	</md-slider-container>
+</md-content>
+</div>
+<div>
+	<md-button type="submit" ng-click="$ctrl.modifyPool($ctrl.pool)">Save</md-button>
+	<md-button ui-sref='swimmingPool'>Cancel</md-button>
+</div>
+

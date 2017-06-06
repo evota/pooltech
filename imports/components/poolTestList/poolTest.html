@@ -1,0 +1,31 @@
+<header>
+	<h1>Pool Tests</h1>
+</header>
+      <md-card ng-repeat="poolTest in $ctrl.poolTests">
+        <md-card-title>
+          <md-card-title-text>
+           <span class="md-headline">{{poolTest.name}}</span>
+          </md-card-title-text>
+		  <md-card-title-media>
+				<md-button>
+					 <md-tooltip>Ideal Level {{poolTest.idealLevel}}</md-tooltip>
+					 <md-icon md-font-library="material-icons" ng-style="{color: 'green'}">sentiment_very_satisfied</md-icon>
+				 </md-button>
+ 				<md-button>
+ 					 <md-tooltip>Minimum: {{poolTest.minLevel}} Max: {{poolTest.maxLevel}}</md-tooltip>
+ 					 <md-icon md-font-library="material-icons" ng-style="{color: 'red'}">error_outline</md-icon>
+ 				 </md-button>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-content>
+          <p>{{poolTest.description}}
+          </p>
+		  <ul>
+			  <li ng-repeat="test in $ctrl.getTestByID(poolTest.id) track by $index"> {{test}}</li>
+	  </ul>
+        </md-card-content>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>More Info</md-button>
+          <md-button ng-click="$ctrl.openHowTo($event)">How To</md-button>
+        </md-card-actions>
+      </md-card>

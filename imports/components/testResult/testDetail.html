@@ -1,0 +1,183 @@
+	<header>
+	<h1>{{ $ctrl.testResult._id ? $ctrl.testResult._id : "New Entry" }}</h1>
+</header	
+<md-content>
+<div>
+	<form id="testForm" name="testForm" ng-submit="$ctrl.modifyTestResult($ctrl.testResult)">
+		<input ng-model="$ctrl.testResult._id" type="hidden"/>
+		<md-content layout="row">
+		<md-input-container>
+			<label>SwimmingPool</label>
+			<md-select name="swimmingPool" ng-model="$ctrl.testResult.poolId" required>
+				<md-option ng-repeat="pool in $ctrl.swimmingPools" ng-value="pool._id">
+					{{pool.name}}
+				</md-option>
+			</md-select>
+			<div class="errors" ng-messages="testForm.swimmingPool.$error">
+				<div ng-message="required">Required</div>
+			</div>
+		</md-input-container>
+		<md-input-container>
+			<label>Date</label>
+			<md-datepicker ng-model="$ctrl.testResult.datetime" required></md-datepicker>
+		</md-input-container>	
+		</md-content>
+		<div layout="row">
+			 <md-input-container flex="5">
+				 <md-icon md-font-library="material-icons" ng-style="{color: 'green'}" ng-show="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.fac <= $ctrl.testResult.freeChlorine">
+					sentiment_very_satisfied
+				</md-icon>
+				 <md-icon md-font-library="material-icons" ng-style="{color: 'red'}" ng-hide="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.fac <= $ctrl.testResult.freeChlorine">
+					error_outline
+				</md-icon>
+			</md-input-container>
+			<md-input-container flex="30">
+				<label>FAC Number of Drops</label>
+				<md-select ng-model="$ctrl.facNumberOfDrops">
+					<md-option ng-value="facnumber" ng-repeat="facnumber in $ctrl.numDrops.slice(0,21) track by $index">{{$index}}</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container flex="30">
+				<label>Free Available Chlorine</label>
+				<p hidden>{{ $ctrl.facNumberOfDrops> 0 ? $ctrl.testResult.freeChlorine = $ctrl.facNumberOfDrops * .5 : $ctrl.testResult.freeChlorine = 0 }}</p>
+				<input ng-model="$ctrl.testResult.freeChlorine" disabled />
+			</md-input-container>
+			<md-input-container flex="30">
+				<label>Target FAC</label>
+				<input ng-model="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.fac" disabled/>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			 <md-input-container flex="5">
+				 <md-icon md-font-library="material-icons" ng-style="{color: 'green'}" ng-show="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.cc>= $ctrl.testResult.combinedChlorine">
+					sentiment_very_satisfied
+				</md-icon>
+				 <md-icon md-font-library="material-icons" ng-style="{color: 'red'}" ng-hide="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.cc>= $ctrl.testResult.combinedChlorine">
+					error_outline
+				</md-icon>
+			</md-input-container>
+			<md-input-container flex="30">
+				<label>CC Number of Drops</label>
+				<md-select ng-model="$ctrl.ccNumberOfDrops">
+					<md-option ng-value="ccnumber" ng-repeat="ccnumber in $ctrl.numDrops.slice(0,21) track by $index">{{$index}}</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container flex="30">
+				<label>Combined Chlorine</label>
+				<p hidden>		{{ $ctrl.ccNumberOfDrops> 0 ? $ctrl.testResult.combinedChlorine = $ctrl.ccNumberOfDrops * .5 : $ctrl.testResult.combinedChlorine = 0 }}</p>
+				<input ng-model="$ctrl.testResult.combinedChlorine" disabled />
+			</md-input-container>
+			<md-input-container flex="30">
+				<label>Target CC</label>
+				<input ng-model="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.cc" disabled/>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			 <md-input-container flex="5">
+				 <md-icon md-font-library="material-icons" ng-style="{color: 'green'}" ng-show="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.ch <= $ctrl.testResult.calciumHardness">
+					sentiment_very_satisfied
+				</md-icon>
+				 <md-icon md-font-library="material-icons" ng-style="{color: 'red'}" ng-hide="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.ch <= $ctrl.testResult.calciumHardness">
+					error_outline
+				</md-icon>
+			</md-input-container>
+			<md-input-container flex="30">
+				<label>CH Number of Drops</label>
+				<md-select ng-model="$ctrl.chNumberOfDrops">
+					<md-option ng-value="chnumber" ng-repeat="chnumber in $ctrl.numDrops.slice(1,20) track by $index">{{$index}}</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container flex="30">
+				<label>Calcium Hardness</label>
+				<p hidden>{{$ctrl.chNumberOfDrops> 0 ? $ctrl.testResult.calciumHardness = $ctrl.chNumberOfDrops * 25 : $ctrl.testResult.calciumHardness = 0 }}</p>
+				<input ng-model="$ctrl.testResult.calciumHardness" disabled />
+			</md-input-container>
+			<md-input-container>
+				<label>Target Calcium Hardness</label>
+				<input ng-model="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.ch" disabled/>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			 <md-input-container flex="5">
+				 <md-icon md-font-library="material-icons" ng-style="{color: 'green'}" ng-show="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.ta <= $ctrl.testResult.totalAlkalinity">
+					sentiment_very_satisfied
+				</md-icon>
+				 <md-icon md-font-library="material-icons" ng-style="{color: 'red'}" ng-hide="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.ta <= $ctrl.testResult.totalAlkalinity">
+					error_outline
+				</md-icon>
+			</md-input-container>
+			<md-input-container flex="30">
+				<label>TA Number of Drops</label>
+				<md-select ng-model="$ctrl.taNumberOfDrops">
+					<md-option ng-value="tanumber" ng-repeat="tanumber in $ctrl.numDrops.slice(1.20) track by $index">{{$index}}</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container flex="30">
+				<label>Total Alkalinity</label>
+				<p hidden>{{$ctrl.taNumberOfDrops> 0 ? $ctrl.testResult.totalAlkalinity = $ctrl.taNumberOfDrops * 10 :  $ctrl.testResult.totalAlkalinity = 0 }}</p>
+				<input ng-model="$ctrl.testResult.totalAlkalinity" disabled />
+			</md-input-container>
+			<md-input-container flex="30">
+				<label>Target TA</label>
+				<input ng-model="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.ta" disabled/>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			 <md-input-container flex="5">
+				 <md-icon md-font-library="material-icons" ng-style="{color: 'green'}" ng-show="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.cya <= $ctrl.testResult.cyanuricAcid">
+					sentiment_very_satisfied
+				</md-icon>
+				 <md-icon md-font-library="material-icons" ng-style="{color: 'red'}" ng-hide="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.cya <= $ctrl.testResult.cyanuricAcid">
+					error_outline
+				</md-icon>
+			</md-input-container>
+			<md-input-container flex="40">
+				<label>Cyanuric Acid Level</label>
+				<input ng-model="$ctrl.testResult.cyanuricAcid" type="number"/>
+			</md-input-container>
+			<md-input-container flex="40">
+				<label>Target CYA</label>
+				<input ng-model="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.cya" disabled/>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			 <md-input-container flex="5">
+				 <md-icon md-font-library="material-icons" ng-style="{color: 'green'}" ng-show="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.ph <= $ctrl.testResult.ph">
+					sentiment_very_satisfied
+				</md-icon>
+				 <md-icon md-font-library="material-icons" ng-style="{color: 'red'}" ng-hide="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.ph <= $ctrl.testResult.ph">
+					error_outline
+				</md-icon>
+			</md-input-container flex="40">
+			<md-input-container>
+				<label>PH Level</label>
+				<input ng-model="$ctrl.testResult.ph" type="number"  step=".1" value=7 />
+			</md-input-container>
+			<md-input-container flex="40">
+				<label>Target PH</label>
+				<input ng-model="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.ph" disabled/>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container>
+				<label>Pool Temperature</label>
+				<input ng-model="$ctrl.testResult.poolTemperature" type="number"/>
+			</md-input-container>
+			<md-input-container>
+				<label>Outdoor Temperature</label>
+				<input ng-model="$ctrl.testResult.outdoorTemperature" type="number"/>
+			</md-input-container>
+		</div>
+		<div layout="row">
+			<md-input-container flex="75">
+				<label>Notes</label>
+				<textarea ng-model="$ctrl.testResult.notes" md-select-on-focus rows="5" md-maxlength="250"></textarea>
+			</md-input_container>
+		</div>
+		<div layout="row">
+			<md-button type="submit" ng-click="$ctrl.modifyTestResult($ctrl.testResult)" ng-disabled="!testForm.swimmingPool.$valid">Save</md-button>
+			<md-button ui-sref='testResult'>Cancel</md-button>
+		</div>
+	</form>
+	</div>
+</md-content>

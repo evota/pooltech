@@ -1,0 +1,23 @@
+<md-dialog aria-label="How To perform test">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>How To {{test.name}} </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="closeHowTo()">
+          <md-icon  aria-label="Close dialog">close</md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <h2>Here are steps for performing this test there are {{countTests}}</h2>
+		<ul>
+<li>Step 1</li>
+
+		</ul>
+      </div>
+    </md-dialog-content>
+  </form>
+</md-dialog>

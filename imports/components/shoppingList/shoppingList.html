@@ -1,0 +1,27 @@
+<div layout="column" class="md-inline-form">
+<md-content layout-padding>
+	<form id="frmShoppingList" ng-submit="$ctrl.modifyItem($ctrl.item)">
+		<div layout-gt-sm="row">
+			<md-input-container class="md-block">
+				<label>Product</label>
+				<input required ng-model="$ctrl.item.product"/>
+			</md-input-container>
+			<md-input-container class="md-block">
+				<label>Cost</label>
+				<input ng-model="$ctrl.item.cost" type="number"/>
+			</md-input-container>
+		<md-button type="submit">Add</md-button>
+		</div>
+	</form>		
+<md-list>
+	<md-list-item ng-repeat="item in $ctrl.shoppingList">
+		<md-checkbox ng-model="item.purchased"></md-checkbox>
+			{{item.product}}
+		<md-input-container class="md-block"> 
+			<label>Cost</label>
+			<input required ng-model="item.cost"/>
+		</md-input-container>
+	</md-list-item>
+</md-list>
+</md-content>
+</div>

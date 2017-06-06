@@ -1,0 +1,21 @@
+<div layout="column" class="md-inline-form">
+<md-content ng-show="!$ctrl.currentUser">
+	<strong>Please login to continue</strong>
+</md-content>
+<md-content id="main" ng-show="$ctrl.currentUser">
+      <md-button class="md-fab md-fab-top-right" aria-label="Add" ui-sref="testDetail">
+        <ng-md-icon icon="add">New</ng-md-icon>
+      </md-button>
+	<md-divider></md-divider>
+	<md-list>
+		<md-list-item ng-repeat="pool in $ctrl.swimmingPools" ui-sref="swimmingPoolDetail({poolId: pool._id})" class="noright">
+			{{pool.name }} {{pool.address.street}} {{pool.address.city}}
+			<md-button  ng-click="$ctrl.removePool(pool._id)">&times;</md-button>
+			<md-button ui-sref="swimmingPoolDetail({poolId: pool._id})">&#9998;</md-button>
+		 	<md-divider></md-divider>
+		</md-list-item>
+	</md-list>
+	<md-divider></md-divider>
+	<md-button ui-sref="swimmingPoolDetail">New Pool</md-button>
+</md-content>
+</div>
