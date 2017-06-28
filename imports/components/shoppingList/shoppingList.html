@@ -15,12 +15,14 @@
 	</form>		
 <md-list>
 	<md-list-item ng-repeat="item in $ctrl.shoppingList">
+		   {{item._id}}
 		<md-checkbox ng-model="item.purchased"></md-checkbox>
 			{{item.product}}
 		<md-input-container class="md-block"> 
 			<label>Cost</label>
 			<input required ng-model="item.cost"/>
 		</md-input-container>
+		<md-button ng-click="$ctrl.modifyItem(item)">Update</md-button>
 	</md-list-item>
 </md-list>
 </md-content>
