@@ -29,6 +29,9 @@ function controller($scope, $timeout, $mdSidenav){
 	$scope.toggleSidenav = function(menuId){
 		$mdSidenav(menuId).toggle();
 	}
+	$scope.close = function(){
+		$mdSidenav('left').close();
+	}
 }
 function config($locationProvider, $stateProvider, $urlRouterProvider,$mdThemingProvider){
 	'ngInject';

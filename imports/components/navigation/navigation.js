@@ -10,14 +10,14 @@ import swimmingPool from '/imports/components/swimmingPool/swimmingPool';
 
 
 class NavigationController{
-	 AppCtrl($scope) {
+	constructor($scope) {
       $scope.currentNavItem = 'Home';
- 	}
+	}
 }
 export default angular.module('navigation', [
 	angularMeteor
 ])
 	.component('navigation',{
 		templateUrl: 'imports/components/navigation/navigation.html',
-		controller: ['$scope', NavigationController]
+		controller: ['$scope', '$mdSidenav', NavigationController]
 	});
