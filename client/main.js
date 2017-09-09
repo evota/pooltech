@@ -9,6 +9,7 @@ import '../imports/startup/accounts-config.js';
 import ngMessages from 'angular-messages';
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
+import ngMap from 'ngmap';
 
 angular.module('pool-tech', [
 		angularMeteor,
@@ -20,6 +21,7 @@ angular.module('pool-tech', [
 		'accounts.ui',
 		'ngMaterial',
 		'ngMessages',
+		'ngMap',
 		uiRouter
 ])
  	.config(config)

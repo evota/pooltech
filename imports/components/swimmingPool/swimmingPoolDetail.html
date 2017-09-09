@@ -15,6 +15,10 @@
 				<label>Picture</label>
 				<input ng-model="$ctrl.pool.image" />
 			</md-input-container>
+</md-content>
+<h2>Pool Details</h2>
+<md-tabs md-dynamic-height md-border-bottom>
+<md-tab label="Details">
 			<md-input-container class="md-block">
 				<label>Street Address</label>
 				<input ng-model="$ctrl.pool.address.street" />
@@ -38,8 +42,6 @@
 				<input ng-model="$ctrl.pool.address.zipcode" />
 			</md-input-container>
 		</div>
-</md-content>
-<h2>Pool Details</h2>
 <md-content layout-gt-sm="row" layout-padding>
 	<md-input-container class="md-block" flex="25">
 		<label>Size in Gallons</label>
@@ -66,7 +68,8 @@
 		<md-datepicker ng-model="$ctrl.pool.lastFilterChange"></md-datepicker>
 	</md-input-container>
 </md-content>
-<h3>Target Levels</h3>
+</md-tab>
+<md-tab label="Targets">
 <md-content layout="row" layout-padding>
 	<md-slider-container flex ng-repeat="poolTest in $ctrl.poolTests">
 		<md-input-container>
@@ -80,7 +83,40 @@
 		<h5>{{poolTest.name}}</h5>
 	</md-slider-container>
 </md-content>
+</md-tab>
+<md-tab label="Chemicals">
+<md-content layout="row" layout-padding>
+	<md-list>
+		<md-list-item ng-repeat="chem in $ctrl.pool.chemicals track by $index">
+			<div class="md-list-item-text">
+				<md-button  ng-click="$ctrl.removeChemical(chem)">&times;</md-button>
+				{{chem.name}} {{chem.strength}}
+			</div>
+		</md-list-item>
+	</md-list>
+</md-content>
+<md-content layout="row" layout-padding>
+		<md-button ng-click="$ctrl.addChemical($ctrl.chemical)">&plus;</md-button>
+	<md-input-container>
+		<label>Chemical</label>
+		<input ng-model="$ctrl.chemical.name"/>
+	</md-input-container>
+	<md-input-container>
+		<label>Strength</label>
+		<input ng-model="$ctrl.chemical.strength"/>
+	</md-input-container>
+</md-content>	
+</md-tab>
+<md-tab label="Map">
+<div map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkNRrGEWqMPjAz8aaR18oxdCUS6TbkG4I">
+  <ng-map center="{{$ctrl.pool.address.street}},{{$ctrl.pool.address.city}},{{$ctrl.pool.address.state}}" zoom="15" map-type-id="MapTypeId.SATELLITE">
+  	<marker position="{{$ctrl.pool.address.street}},{{$ctrl.pool.address.city}},{{$ctrl.pool.address.state}}"></marker>
+	<traffic-layer></traffic-layer>
+  </ng-map>
 </div>
+</md-tab>
+</md-tabs>
+
 <div>
 	<md-button type="submit" ng-click="$ctrl.modifyPool($ctrl.pool)">Save</md-button>
 	<md-button ui-sref='swimmingPool'>Cancel</md-button>

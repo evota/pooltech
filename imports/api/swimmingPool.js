@@ -25,6 +25,7 @@ Meteor.methods({
 			image: pool.image,
 			lastFilterChange: pool.lastFilterChange,
 			targets: pool.targets,
+			chemicals: pool.chemicals,
 			owner: Meteor.userId()
 		});
 	},
@@ -43,6 +44,7 @@ Meteor.methods({
 			image: pool.image,
 			lastFilterChange: pool.lastFilterChange,
 			targets: pool.targets,
+			chemicals: pool.chemicals,
 			owner: Meteor.userId()
 		});
 	}

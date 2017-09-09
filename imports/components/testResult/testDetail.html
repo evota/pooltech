@@ -8,7 +8,7 @@
 		<md-content layout="row">
 		<md-input-container>
 			<label>SwimmingPool</label>
-			<md-select name="swimmingPool" ng-model="$ctrl.testResult.poolId" required>
+			<md-select name="swimmingPool" ng-model="$ctrl.testResult.poolId" required md-on-close="$ctrl.getPoolLastResult($ctrl.testResult.poolId)">
 				<md-option ng-repeat="pool in $ctrl.swimmingPools" ng-value="pool._id">
 					{{pool.name}}
 				</md-option>
@@ -46,6 +46,10 @@
 				<label>Target FAC</label>
 				<input ng-model="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.fac" disabled/>
 			</md-input-container>
+			<md-input-container flex="30" ng-show=$ctrl.isNew>
+				<label>Last FAC</label>
+				<input ng-model="$ctrl.lastResult.freeChlorine" disabled>
+			</md-input-containter>
 		</div>
 		<div layout="row">
 			 <md-input-container flex="5">
@@ -71,6 +75,10 @@
 				<label>Target CC</label>
 				<input ng-model="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.cc" disabled/>
 			</md-input-container>
+			<md-input-container flex="30" ng-show=$ctrl.isNew>
+				<label>Last CC</label>
+				<input ng-model="$ctrl.lastResult.combinedChlorine" disabled>
+			</md-input-containter>
 		</div>
 		<div layout="row">
 			 <md-input-container flex="5">
@@ -96,6 +104,10 @@
 				<label>Target Calcium Hardness</label>
 				<input ng-model="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.ch" disabled/>
 			</md-input-container>
+			<md-input-container flex="30" ng-show=$ctrl.isNew>
+				<label>Last CH</label>
+				<input ng-model="$ctrl.lastResult.calciumHardness" disabled>
+			</md-input-containter>			
 		</div>
 		<div layout="row">
 			 <md-input-container flex="5">
@@ -121,6 +133,10 @@
 				<label>Target TA</label>
 				<input ng-model="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.ta" disabled/>
 			</md-input-container>
+			<md-input-container flex="30" ng-show=$ctrl.isNew>
+				<label>Last TA</label>
+				<input ng-model="$ctrl.lastResult.totalAlkalinity" disabled>
+			</md-input-containter>
 		</div>
 		<div layout="row">
 			 <md-input-container flex="5">
@@ -139,6 +155,10 @@
 				<label>Target CYA</label>
 				<input ng-model="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.cya" disabled/>
 			</md-input-container>
+			<md-input-container flex="30" ng-show=$ctrl.isNew>
+				<label>Last CYA</label>
+				<input ng-model="$ctrl.lastResult.cyanuricAcid" disabled>
+			</md-input-containter>			
 		</div>
 		<div layout="row">
 			 <md-input-container flex="5">
@@ -157,6 +177,10 @@
 				<label>Target PH</label>
 				<input ng-model="$ctrl.getPoolDetails($ctrl.testResult.poolId)[0].targets.ph" disabled/>
 			</md-input-container>
+			<md-input-container flex="30" ng-show=$ctrl.isNew>
+				<label>Last PH</label>
+				<input ng-model="$ctrl.lastResult.ph" disabled>
+			</md-input-containter>
 		</div>
 		<div layout="row">
 			<md-input-container>

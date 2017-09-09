@@ -19,6 +19,8 @@ class TestResultController {
 		this.subscribe('testResults');
 		this.subscribe('swimmingPools');
 		this.testResult = {};
+		this.lastResult = {};
+		this.isNew = true;
 		this.numDrops = Array.from(Array(51).keys());
 		if ($stateParams.testResultId){
 			this.testResult = this.editResult($stateParams.testResultId);
@@ -58,9 +60,14 @@ class TestResultController {
 			}
 		})
 	}
+	getPoolLastResult(poolId){
+		const selector = {};
+		selector.owner = { $eq: Meteor.userId()};
+		selector.poolId = { $eq: poolId };
+		this.lastResult = TestResults.findOne(selector, {sort: {datetime: -1}});
+	}
 	getPoolDetails(poolId) {
 		return this.$filter('filter')(this.swimmingPools, {'_id': poolId});
-//return 'My Pool ID ' + poolId;
 	}
 	setNumberOfDays(days){
 		this.showNumberOfDays = days;
@@ -68,16 +75,15 @@ class TestResultController {
 	modifyTestResult(testResult) {
 		if ( !testResult._id ) {
 			Meteor.call('testResults.insert', testResult);
-			//this.insertResult(testResult);
 		} else {
 			Meteor.call('testResults.update', testResult);
-			//this.updateResult(testResult);
 		}
 		this.$state.go('testResult');
 	}
 	editResult(id){
 		result = TestResults.findOne({"_id": id});
 		if (result){
+			this.isNew = false;
 			this.facNumberOfDrops = result.freeChlorine / .5;
 			this.ccNumberOfDrops = result.combinedChlorine / .5;
 			this.taNumberOfDrops = result.totalAlkalinity / 10;
@@ -88,6 +94,7 @@ class TestResultController {
 		}
 	}
 	initResult(){
+		this.isNew = true;
 		this.testResult = {};
 		this.facNumberOfDrops = 0;
 		this.ccNumberOfDrops = 0;

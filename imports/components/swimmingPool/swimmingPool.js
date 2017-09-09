@@ -1,6 +1,7 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import ngMaterial from 'angular-material';
+import ngMap from 'ngmap';
 import { Meteor } from 'meteor/meteor';
 import { SwimmingPools } from '../../api/swimmingPool.js';
 import template from './swimmingPool.html';
@@ -25,6 +26,8 @@ class SwimmingPoolController{
 		            'WY').split(' ').map(function (state) { return { abbrev: state }; });
 		this.poolSurfaces = ["Plaster", "Vinyl", "Fiberglass"];
 		this.chlorineTypes = ["Chlorine", "Trichlor", "SaltWater"];
+		this.chemicals = [{}];
+		this.chemical = {};
 		this.poolTests = 			this.poolTests = [
 			{
 			"id": "fac",
@@ -113,6 +116,21 @@ class SwimmingPoolController{
 				return Meteor.user();
 			}
 		})
+	}
+	addChemical(chemical){
+
+		this.pool.chemicals.push(chemical);
+		this.chemical = {};
+//		this.modifyPool(this.pool);
+//		editPool(this.pool._id);
+	}
+	removeChemical(chemical){
+		this.pool.chemicals.forEach(function remove(value, index, chemicals){
+			if (value === chemical) {
+				chemicals.splice(index, 1);
+			}
+		});
+
 	}
 	editPool(poolId){
 		result = SwimmingPools.findOne({"_id": poolId});
