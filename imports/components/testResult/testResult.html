@@ -5,7 +5,7 @@
 	<strong>Please login to continue</strong>
 </md-content>
 <md-content id="main" ng-show="$ctrl.currentUser">
-      <md-button class="md-fab md-fab-top-right" aria-label="Add" ui-sref="testDetail">
+      <md-button class="md-fab md-fab-top-right" aria-label="Add" ui-sref="testDetail({testResultId: null})">
         <ng-md-icon icon="add">New</ng-md-icon>
       </md-button>
 <md-menu md-offset="0 -7">
@@ -32,11 +32,13 @@
 		<md-list-item ng-repeat="result in $ctrl.testResults" ui-sref="testDetail({testResultId: result._id})" class="noright">
 				{{$ctrl.getPoolDetails(result.poolId)[0].name}} from &nbsp
 			{{result.datetime | date:'MM/dd/yyyy'}}
-			<md-button  ng-click="$ctrl.removeResult(result)">&times;</md-button>
-			<md-button ui-sref="testDetail({testResultId: result._id})">&#9998;</md-button>
+			<!-- 
+				<md-button  ng-click="$ctrl.removeResult(result)">&times;</md-button> 
+				<md-button ui-sref="testDetail({testResultId: result._id})">&#9998;</md-button>
+			-->
 		 	<md-divider></md-divider>
 		</md-list-item>
 	</md-list>
 	<md-divider></md-divider>
-	<md-button ui-sref="testDetail">New Result</md-button>
+	<md-button ui-sref="testDetail({testResultId: null})">New Result</md-button>
 </md-content>

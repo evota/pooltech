@@ -104,6 +104,15 @@ class TestResultController {
 		$state.go('testDetail({testResult._id})');
 	}
 	removeResult(result){
+/*		this.confirm = $mdDialog.confirm()
+			.title('Confirm Delete')
+			.textContent('Are you sure you want to delete the result from {{result.datetime}}')
+			.ariaLabel('Delete Confirmation')
+			.targetEvent()
+			.ok('Yes please')
+			.cancel('No thanks');
+			$mdDialog.show(this.confirm);
+*/		
 		Meteor.call('testResults.remove', result._id);
 	}
 }

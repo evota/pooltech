@@ -200,6 +200,7 @@
 		</div>
 		<div layout="row">
 			<md-button type="submit" ng-click="$ctrl.modifyTestResult($ctrl.testResult)" ng-disabled="!testForm.swimmingPool.$valid">Save</md-button>
+			<md-button type="submit" ng-click="$ctrl.removeResult($ctrl.testResult)" ng-disabled="!$ctrl.testResult._id">Delete</md-button>
 			<md-button ui-sref='testResult'>Cancel</md-button>
 		</div>
 	</form>
