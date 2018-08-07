@@ -3,24 +3,55 @@
 	<form id="frmShoppingList" ng-submit="$ctrl.modifyItem($ctrl.item)">
 		<div layout-gt-sm="row">
 			<md-input-container class="md-block">
+				<label>SwimmingPool</label>
+				<md-select name="swimmingPool" ng-model="$ctrl.item.poolId">
+					<md-option ng-repeat="pool in $ctrl.swimmingPools" ng-value="pool._id">
+						{{pool.name}}
+					</md-option>
+				</md-select>
+			</md-input-container>
+			<md-input-container class="md-block">
 				<label>Product</label>
 				<input required ng-model="$ctrl.item.product"/>
 			</md-input-container>
 			<md-input-container class="md-block">
 				<label>Cost</label>
-				<input ng-model="$ctrl.item.cost" type="number"/>
+				<input ng-model="$ctrl.item.cost" />
+			</md-input-container>
+			<md-input-container class="md-block"> 
+				<label>Date Purchased</label>
+				<md-datepicker ng-model="$ctrl.item.datePurchased"/>
 			</md-input-container>
 		<md-button type="submit">Add</md-button>
 		</div>
 	</form>		
+<h2>To Purchase</h2>
 <md-list>
-	<md-list-item ng-repeat="item in $ctrl.shoppingList">
-		   {{item._id}}
-		<md-checkbox ng-model="item.purchased"></md-checkbox>
+	<md-list-item ng-repeat="item in $ctrl.shoppingList | filter:{purchased:false}">
 			{{item.product}}
 		<md-input-container class="md-block"> 
 			<label>Cost</label>
 			<input required ng-model="item.cost"/>
+		</md-input-container>
+		<md-input-container class="md-block"> 
+			<label>Date Purchased</label>
+			<md-datepicker ng-model="item.datePurchased"/>
+		</md-input-container>
+		<md-button ng-click="$ctrl.modifyItem(item)">Update</md-button>
+	</md-list-item>
+
+</md-list>
+<h2>Recent Purchases</h2>
+<md-list>
+	<md-list-item ng-repeat="item in $ctrl.shoppingList | filter:{purchased:true}">
+			{{item.product}} for {{$ctrl.getPoolDetails(item.poolId)[0].name}}
+		<md-input-container class="md-block"> 
+			<label>Cost</label>
+			<input required ng-model="item.cost"/>
+		</md-input-container>
+		<md-input-container class="md-block"> 
+			<label>Date Purchased</label>
+			<md-datepicker ng-model="item.datePurchased"/>
 		</md-input-container>
 		<md-button ng-click="$ctrl.modifyItem(item)">Update</md-button>
 	</md-list-item>

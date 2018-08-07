@@ -14,20 +14,36 @@ Meteor.methods({
 		if (!Meteor.userId()){
 			throw new Meteor.Error('not-authorized');
 		}
+		if (item.datePurchased) {
+			item.purchased = true;
+		}else{
+		 item.purchased = false;
+	 	}
 		ShoppingList.insert({
 		product: item.product,
 		cost: item.cost,
-		purchased: false
+		purchased: item.purchased,
+		poolId: item.poolId,
+		datePurchased: item.datePurchased,
+		owner: Meteor.userId()
 	});
 	},
 	'shoppingList.remove' (itemId){
 		ShoppingList.remove(itemId);
 	},
 	'shoppingList.update' (item){
+		if (item.datePurchased) {
+			item.purchased = true;
+		}else{
+		 item.purchased = false;
+	 	}
 		ShoppingList.update(item._id,{
 			product: item.product,
 			cost: item.cost,
-			purchased: item.purchased
+			purchased: item.purchased,
+			poolId: item.poolId,
+			datePurchased: item.datePurchased,
+			owner: Meteor.userId()
 		});
 	}
 })
