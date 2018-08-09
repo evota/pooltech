@@ -3,7 +3,7 @@
 	<strong>Please login to continue</strong>
 </md-content>
 <md-content id="main" ng-show="$ctrl.currentUser">
-      <md-button class="md-fab md-fab-top-right" aria-label="Add" ui-sref="testDetail">
+      <md-button class="md-fab md-fab-top-right" aria-label="Add" ui-sref="swimmingPoolDetail({poolId: null})">
         <ng-md-icon icon="add">New</ng-md-icon>
       </md-button>
 	<md-divider></md-divider>
@@ -18,6 +18,6 @@
 		</md-list-item>
 	</md-list>
 	<md-divider></md-divider>
-	<md-button ui-sref="swimmingPoolDetail">New Pool</md-button>
+	<md-button ui-sref="swimmingPoolDetail({poolId: null})">New Pool</md-button>
 </md-content>
 </div>

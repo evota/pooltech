@@ -21,6 +21,7 @@ class SwimmingPoolController{
 		}else{
 			this.pool = {};
 		}	
+		this.mapURL = Meteor.settings.public.googleMapsAPI;
 		this.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
 		            'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
 		            'WY').split(' ').map(function (state) { return { abbrev: state }; });
@@ -28,7 +29,7 @@ class SwimmingPoolController{
 		this.chlorineTypes = ["Chlorine", "Trichlor", "SaltWater"];
 		this.chemicals = [{}];
 		this.chemical = {};
-		this.poolTests = 			this.poolTests = [
+		this.poolTests = [
 			{
 			"id": "fac",
 			"minLevel": 0,
@@ -119,7 +120,11 @@ class SwimmingPoolController{
 	}
 	addChemical(chemical){
 
-		this.pool.chemicals.push(chemical);
+		if (this.pool.chemicals){
+			this.pool.chemicals.push(chemical);
+		}else{
+			this.pool.chemicals = new Array(chemical);
+		}
 		this.chemical = {};
 //		this.modifyPool(this.pool);
 //		editPool(this.pool._id);
@@ -133,7 +138,7 @@ class SwimmingPoolController{
 
 	}
 	editPool(poolId){
-		result = SwimmingPools.findOne({"_id": poolId});
+		let result = SwimmingPools.findOne({"_id": poolId});
 		if (result){
 			return result;
 		}else{

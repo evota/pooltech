@@ -100,7 +100,7 @@ class PoolTestListController {
 	
 	getTestByID(testId){
 	//			return ["Step 1 for " + testId, "Step 3 for " +testId];
-		test = this.$filter('filter')(this.poolTests, {id: testId}, true);
+		let test = this.$filter('filter')(this.poolTests, {id: testId}, true);
 		return test;
 //		return this.$filter('filter')(this.poolTests, {id: testId}, true);
 //		return test.name;				  

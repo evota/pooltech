@@ -15,6 +15,7 @@
 				<label>Picture</label>
 				<input ng-model="$ctrl.pool.image" />
 			</md-input-container>
+	</form>
 </md-content>
 <h2>Pool Details</h2>
 <md-tabs md-dynamic-height md-border-bottom>
@@ -108,7 +109,7 @@
 </md-content>	
 </md-tab>
 <md-tab label="Map">
-<div map-lazy-load="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkNRrGEWqMPjAz8aaR18oxdCUS6TbkG4I">
+<div map-lazy-load="{{$ctrl.mapURL}}">
   <ng-map center="{{$ctrl.pool.address.street}},{{$ctrl.pool.address.city}},{{$ctrl.pool.address.state}}" zoom="15" map-type-id="MapTypeId.SATELLITE">
   	<marker position="{{$ctrl.pool.address.street}},{{$ctrl.pool.address.city}},{{$ctrl.pool.address.state}}"></marker>
 	<traffic-layer></traffic-layer>
@@ -122,4 +123,4 @@
 	<md-button type="submit" ng-click="$ctrl.removePool($ctrl.pool._id)">Delete</md-button>
 	<md-button ui-sref='swimmingPool'>Cancel</md-button>
 </div>
-
+	</div>

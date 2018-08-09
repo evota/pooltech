@@ -81,7 +81,7 @@ class TestResultController {
 		this.$state.go('testResult');
 	}
 	editResult(id){
-		result = TestResults.findOne({"_id": id});
+		let result = TestResults.findOne({"_id": id});
 		if (result){
 			this.isNew = false;
 			this.facNumberOfDrops = result.freeChlorine / .5;
