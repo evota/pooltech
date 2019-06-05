@@ -6,10 +6,11 @@ import { ShoppingList } from '../../api/shoppingList.js';
 import { SwimmingPools} from '../../api/swimmingPool.js';
 import template from './shoppingList.html';
 import uiRouter from 'angular-ui-router';
+import $mdToast from 'angular-material';
 
 
 class ShoppingListController{
-	constructor($scope, $stateParams, $state, $filter) {
+	constructor($scope, $stateParams, $state, $filter, $mdToast) {
 		'ngInject';
 		$scope.viewModel(this);
 		this.$state = $state;
@@ -17,6 +18,7 @@ class ShoppingListController{
 		this.subscribe('shoppingList');
 		this.subscribe('swimmingPools');
 		this.item = {};
+		this.showNew = false;
 		this.helpers({
 			shoppingList(){
 					return ShoppingList.find({"owner": Meteor.userId()},{sort: {
@@ -28,12 +30,21 @@ class ShoppingListController{
 			}
 		})
 	}
+	toggleNew(){
+		if (this.showNew){
+			this.showNew = false;
+		}else{
+			this.showNew = true;
+		}
+	}
 	modifyItem(item){
+		//$mdToast.showSimple("Item Saved");
 		if (item._id){
 			Meteor.call("shoppingList.update", item);
 		} else {
 			Meteor.call("shoppingList.insert", item);
 		}
+		
 		this.$state.go('shoppingList');
 	}
 	removeItem(itemId){
@@ -53,5 +64,5 @@ export default angular.module('shoppingList', [
 ])
 	.component('shoppingList',{
 		templateUrl: 'imports/components/shoppingList/shoppingList.html',
-		controller: ['$scope', '$stateParams', '$state', '$filter', ShoppingListController]
+		controller: ['$scope', '$stateParams', '$state', '$filter', '$mdToast', ShoppingListController]
 	});

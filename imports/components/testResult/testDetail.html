@@ -199,6 +199,11 @@
 			</md-input-container>
 		</div>
 		<div layout="row">
+			Please do the following: <br/>
+			Add {{$ctrl.calculateChlorine($ctrl.testResult)}} ounces of Chlorine.<br/>
+
+		</div>
+		<div layout="row">
 			<md-button type="submit" ng-click="$ctrl.modifyTestResult($ctrl.testResult)" ng-disabled="!testForm.swimmingPool.$valid">Save</md-button>
 			<md-button type="submit" ng-click="$ctrl.removeResult($ctrl.testResult)" ng-disabled="!$ctrl.testResult._id">Delete</md-button>
 			<md-button ui-sref='testResult'>Cancel</md-button>

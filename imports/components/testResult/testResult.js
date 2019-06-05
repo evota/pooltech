@@ -69,6 +69,12 @@ class TestResultController {
 	getPoolDetails(poolId) {
 		return this.$filter('filter')(this.swimmingPools, {'_id': poolId});
 	}
+	calculateChlorine(testResult){
+		let pool = this.getPoolDetails(testResult.poolId);
+		let diff = testResult.freeChlorine - pool.targets.fac;
+		return diff * (pool.size/10000)*10.7;
+	}
+	
 	setNumberOfDays(days){
 		this.showNumberOfDays = days;
 	}

@@ -25,6 +25,7 @@ Meteor.methods({
 		purchased: item.purchased,
 		poolId: item.poolId,
 		datePurchased: item.datePurchased,
+		dateAdded: new Date,
 		owner: Meteor.userId()
 	});
 	},
