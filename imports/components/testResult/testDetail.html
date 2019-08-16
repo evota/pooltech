@@ -1,40 +1,46 @@
 	<header>
-	<h1>{{ $ctrl.testResult._id ? $ctrl.testResult._id : "New Entry" }}</h1>
+	<h1>{{ $ctrl.testResult._id ? "Edit Entry" : "New Entry" }}</h1>
+	<md-button ng-hide=$ctrl.isNew class="md-fab md-fab-top-right" aria-label="Add" ng-click="$ctrl.calculateChemicals($ctrl.testResult)">
+			<md-icon>pool</md-icon>
+		</md-button>
 </header>
 <md-content>
 <div>
-	<form id="testForm" name="testForm" ng-submit="$ctrl.modifyTestResult($ctrl.testResult)">
+	<form id="testForm" name="testForm" ng-submit="$ctrl.modifyTestResult($ctrl.testResult)">	
 		<input ng-model="$ctrl.testResult._id" type="hidden"/>
-		<md-button ng-hide=$ctrl.isNew class="md-fab md-fab-top-right" aria-label="Add" ng-click="$ctrl.calculateChemicals($ctrl.testResult)">
-			<md-icon>pool</md-icon>
-		</md-button>
-		<md-content ng-show=$ctrl.showBalance layout="row">		
-			<p>To Rebalance add the following:
-				<ul>
-					<li>Chlorine:  {{$ctrl.chemMaint.chlorine | number: 0}} ounces ({{$ctrl.chemMaint.chlorine * 0.125 | number:0}} cups)</li>
-					<li>Muriatic Acid: {{$ctrl.chemMaint.muriaticAcid | number: 0}} ounces</li>
-					<li>Baking Soda: {{$ctrl.chemMaint.bakingSoda * 0.125 | number: 2}} cups</li>
-					<li>Calcium Carbonate: {{$ctrl.chemMaint.calciumCarbonate * 0.125 | number: 0}} cups</li>
-				</ul>
-			</p>
-		</md-content>
-		<md-content layout="row">
-		<md-input-container>
-			<label>SwimmingPool</label>
-			<md-select name="swimmingPool" ng-model="$ctrl.testResult.poolId" required md-on-close="$ctrl.getPoolLastResult($ctrl.testResult.poolId)">
-				<md-option ng-repeat="pool in $ctrl.swimmingPools" ng-value="pool._id">
-					{{pool.name}}
-				</md-option>
-			</md-select>
-			<div class="errors" ng-messages="testForm.swimmingPool.$error">
-				<div ng-message="required">Required</div>
+		
+			<div layout="row">
+				<md-input-container ng-show=$ctrl.showBalance flex="75">
+					<p>To Rebalance add the following: 
+						<ul>
+							<li>Chlorine:  {{$ctrl.chemMaint.chlorine | number: 0}} ounces ({{$ctrl.chemMaint.chlorine * 0.125 | number:0}} cups)</li>
+							<li>Muriatic Acid: {{$ctrl.chemMaint.muriaticAcid | number: 0}} ounces</li>
+							<li>Baking Soda: {{$ctrl.chemMaint.bakingSoda * 0.125 | number: 2}} cups</li>
+							<li>Calcium Carbonate: {{$ctrl.chemMaint.calciumCarbonate * 0.125 | number: 0}} cups</li>
+						</ul>
+					</p>
+				</md-input-container>
 			</div>
-		</md-input-container>
-		<md-input-container>
-			<label>Date</label>
-			<md-datepicker ng-model="$ctrl.testResult.datetime" required></md-datepicker>
-		</md-input-container>	
-		</md-content>
+			<md-content layout="row">
+			<div layout="row">
+				<md-input-container>
+					<label>SwimmingPool</label>
+					<md-select name="swimmingPool" ng-model="$ctrl.testResult.poolId" required md-on-close="$ctrl.getPoolLastResult($ctrl.testResult.poolId)">
+						<md-option ng-repeat="pool in $ctrl.swimmingPools" ng-value="pool._id">
+							{{pool.name}}
+						</md-option>
+					</md-select>
+					<div class="errors" ng-messages="testForm.swimmingPool.$error">
+					<div ng-message="required">Required</div>
+					</div>
+				</md-input-container>
+				<md-input-container>
+					<label>Date</label>
+					<md-datepicker ng-model="$ctrl.testResult.datetime" required></md-datepicker>
+				</md-input-container>	
+			
+		</div>
+	</md-content>
 		<div layout="row">
 			<md-input-container flex="30">
 				<label>FAC Number of Drops</label>
