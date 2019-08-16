@@ -1,13 +1,12 @@
 <header ng-show="$ctrl.currentUser">
 	<h1>Test Results ({{$ctrl.displayedRecords}} of {{$ctrl.totalRecordCount}}) for {{$ctrl.currentUser.profile.name ? $ctrl.currentUser.profile.name : $ctrl.currentUser.username }}</h1>
+
+
 </header>
 <md-content ng-show="!$ctrl.currentUser">
 	<strong>Please login to continue</strong>
 </md-content>
 <md-content id="main" ng-show="$ctrl.currentUser">
-      <md-button class="md-fab md-fab-top-right" aria-label="Add" ui-sref="testDetail({testResultId: null})">
-        <ng-md-icon icon="add">New</ng-md-icon>
-      </md-button>
 <md-menu md-offset="0 -7">
 	<md-button aria-label="Filter" ng-click="$mdOpenMenu($event)">
 		Filter &or;
@@ -26,6 +25,9 @@
 			<md-button ng-click="$ctrl.setNumberOfDays(60)">Last 60 Days</md-button>
 		</md-menu-item>
 	</md-menu-content>
+	<md-button class="md-fab md-fab-top-right" aria-label="Add" ui-sref="testDetail({testResultId: null})">
+			<md-icon>add</md-icon>
+	</md-button>	
 	</md-menu>
 	<md-divider></md-divider>
 	<md-list>

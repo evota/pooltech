@@ -41,7 +41,7 @@ class TestResultController {
 					$eq: Meteor.userId()
 				}
 				if (this.getReactively('showNumberOfDays') > 0) {
-					dateFrom = new Date();
+					let dateFrom = new Date();
 					dateFrom.setDate(dateFrom.getDate() - this.showNumberOfDays);
 					selector.datetime = {
 						$gte: new Date(dateFrom)

@@ -1,11 +1,15 @@
+<header>
+	<h1>Swimming Pools</h1>
+	<md-button class="md-fab md-fab-top-right" aria-label="Add" ui-sref="swimmingPoolDetail({poolId: null})">
+		<md-icon>add</md-icon>
+	</md-button>
+</header>
 <div layout="column" class="md-inline-form">
 <md-content ng-show="!$ctrl.currentUser">
 	<strong>Please login to continue</strong>
 </md-content>
 <md-content id="main" ng-show="$ctrl.currentUser">
-      <md-button class="md-fab md-fab-top-right" aria-label="Add" ui-sref="swimmingPoolDetail({poolId: null})">
-        <ng-md-icon icon="add">New</ng-md-icon>
-      </md-button>
+
 	<md-divider></md-divider>
 	<md-list>
 		<md-list-item ng-repeat="pool in $ctrl.swimmingPools" ui-sref="swimmingPoolDetail({poolId: pool._id})" class="noright">
