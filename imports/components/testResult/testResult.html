@@ -30,7 +30,7 @@
 	<md-divider></md-divider>
 	<md-list>
 		<md-list-item ng-repeat="result in $ctrl.testResults" ui-sref="testDetail({testResultId: result._id})" class="noright">
-				{{$ctrl.getPoolDetails(result.poolId)[0].name}} from &nbsp;
+			{{($ctrl.swimmingPools | filter:{_id: result.poolId})[0].name}} from &nbsp;
 			{{result.datetime | date:'MM/dd/yyyy'}}
 			<!-- 
 				<md-button  ng-click="$ctrl.removeResult(result)">&times;</md-button> 

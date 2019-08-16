@@ -10,6 +10,7 @@ import ngMessages from 'angular-messages';
 import uiRouter from 'angular-ui-router';
 import ngMaterial from 'angular-material';
 import ngMap from 'ngmap';
+import ngSanitize from 'angular-sanitize';
 import $mdToast from 'angular-material';
 
 angular.module('pool-tech', [
@@ -23,6 +24,7 @@ angular.module('pool-tech', [
 		'ngMaterial',
 		'ngMessages',
 		'ngMap',
+		'ngSanitize',
 		$mdToast,
 		uiRouter
 ])
