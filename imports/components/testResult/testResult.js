@@ -86,8 +86,9 @@ class TestResultController {
 			if (pool !== undefined){
 				let targets = pool.targets;
 				let poolSize = pool.size;
+				let calcTa = testResult.totalAlkalinity == 0 ? targets.ta : testResult.totalAlkalinity;
 				this.chemMaint.chlorine = this.calculateChlorine(testResult.freeChlorine, targets.fac, poolSize);
-				this.chemMaint.muriaticAcid = this.calculateAcid(testResult.ph, testResult.totalAlkalinity, targets.ph, poolSize);
+				this.chemMaint.muriaticAcid = this.calculateAcid(testResult.ph, calcTa, targets.ph, poolSize);
 				this.chemMaint.bakingSoda = this.calculateBakingSoda(testResult.totalAlkalinity, targets.ta, poolSize);
 				this.chemMaint.calciumCarbonate = this.calculateCalcium(testResult.calciumHardness, targets.ch, poolSize);
 			}else{
@@ -105,7 +106,7 @@ class TestResultController {
 		let diff = targetFac - currentFac;
 		return diff * poolSize / ((75.71 * 12 + 0.746 * 12 * 12) * (1.02 - 0.008 * 12));
 	}
-	calculateAcid(currentPh, currentTa, targetPh, poolSize){
+	calculateAcid(currentPh, totalAlkalinity, targetPh, poolSize){
 		/*Pool Math calculation for PH lowering
 		var mamul = [2.0, 1.11111, 1.0, .909091, 2.16897, 1.08448]; used for the level of acid, the kind I use = 1
 		get delta (target - current)*poolSize
@@ -122,7 +123,7 @@ class TestResultController {
 
 		let adjustment = (192.1626 + -60.1221 * average 
 							+ 6.0752 * average * average 
-							+ -0.1943 * average * average * average) * (currentTa + 13.91) / 114.6;
+							+ -0.1943 * average * average * average) * (totalAlkalinity + 13.91) / 114.6;
 		let delta = (diff * adjustment)
 		return ( delta / -240.15 * 1 );
 	}
