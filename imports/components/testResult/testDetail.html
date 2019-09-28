@@ -2,13 +2,12 @@
 	<h1>{{ $ctrl.testResult._id ? "Edit Entry" : "New Entry" }}</h1>
 	<md-button ng-hide=$ctrl.isNew class="md-fab md-fab-top-right" aria-label="Add" ng-click="$ctrl.calculateChemicals($ctrl.testResult)">
 			<md-icon>pool</md-icon>
-		</md-button>
+	</md-button>
 </header>
 <md-content>
 <div>
 	<form id="testForm" name="testForm" ng-submit="$ctrl.modifyTestResult($ctrl.testResult)">	
-		<input ng-model="$ctrl.testResult._id" type="hidden"/>
-		
+		<input ng-model="$ctrl.testResult._id" type="hidden"/>	
 			<div layout="row">
 				<md-input-container ng-show=$ctrl.showBalance flex="75">
 					<p>To Rebalance add the following: 
@@ -39,8 +38,8 @@
 					<md-datepicker ng-model="$ctrl.testResult.datetime" required></md-datepicker>
 				</md-input-container>	
 			
-		</div>
-	</md-content>
+			</div>
+			</md-content>
 		<div layout="row">
 			<md-input-container flex="30">
 				<label>FAC Number of Drops</label>
@@ -48,10 +47,10 @@
 					<md-option ng-value="facnumber" ng-repeat="facnumber in $ctrl.numDrops.slice(0,21) track by $index">{{$index}}</md-option>
 				</md-select>
 			</md-input-container>
-			<md-input-container flex="30">
+			<md-input-container flex="30">			
+				<p hidden>{{ $ctrl.facNumberOfDrops > 0 ? $ctrl.testResult.freeChlorine = $ctrl.facNumberOfDrops * .5 : $ctrl.testResult.freeChlorine = 0 }}</p>
 				<label>Free Available Chlorine</label>
-				<p hidden>{{ $ctrl.facNumberOfDrops> 0 ? $ctrl.testResult.freeChlorine = $ctrl.facNumberOfDrops * .5 : $ctrl.testResult.freeChlorine = 0 }}</p>
-				<input ng-model="$ctrl.testResult.freeChlorine" disabled />
+				<input ng-model="$ctrl.testResult.freeChlorine" type="number"/>
 			</md-input-container>
 			<md-input-container flex="30">
 				<label>Target FAC</label>
@@ -72,7 +71,7 @@
 			<md-input-container flex="30">
 				<label>Combined Chlorine</label>
 				<p hidden>		{{ $ctrl.ccNumberOfDrops> 0 ? $ctrl.testResult.combinedChlorine = $ctrl.ccNumberOfDrops * .5 : $ctrl.testResult.combinedChlorine = 0 }}</p>
-				<input ng-model="$ctrl.testResult.combinedChlorine" disabled />
+				<input ng-model="$ctrl.testResult.combinedChlorine"  type="number"/>
 			</md-input-container>
 			<md-input-container flex="30">
 				<label>Target CC</label>
@@ -93,7 +92,7 @@
 			<md-input-container flex="30">
 				<label>Calcium Hardness</label>
 				<p hidden>{{$ctrl.chNumberOfDrops> 0 ? $ctrl.testResult.calciumHardness = $ctrl.chNumberOfDrops * 25 : $ctrl.testResult.calciumHardness = 0 }}</p>
-				<input ng-model="$ctrl.testResult.calciumHardness" disabled />
+				<input ng-model="$ctrl.testResult.calciumHardness" type="number"/>
 			</md-input-container>
 			<md-input-container>
 				<label>Target Calcium Hardness</label>
@@ -114,7 +113,7 @@
 			<md-input-container flex="30">
 				<label>Total Alkalinity</label>
 				<p hidden>{{$ctrl.taNumberOfDrops> 0 ? $ctrl.testResult.totalAlkalinity = $ctrl.taNumberOfDrops * 10 :  $ctrl.testResult.totalAlkalinity = 0 }}</p>
-				<input ng-model="$ctrl.testResult.totalAlkalinity" disabled />
+				<input ng-model="$ctrl.testResult.totalAlkalinity"  />
 			</md-input-container>
 			<md-input-container flex="30">
 				<label>Target TA</label>
@@ -142,7 +141,7 @@
 		<div layout="row">
 			<md-input-container>
 				<label>PH Level</label>
-				<input ng-model="$ctrl.testResult.ph" type="number"  step=".1" value=7 />
+				<input ng-model="$ctrl.testResult.ph" type="number"  step=".1" value="7" />
 			</md-input-container>
 			<md-input-container flex="40">
 				<label>Target PH</label>

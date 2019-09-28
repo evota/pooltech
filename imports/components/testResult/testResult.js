@@ -74,6 +74,7 @@ class TestResultController {
 		return poolDetail;
 	}
 	getPoolLastResult(poolId){
+		this.getPoolDetails(poolId);
 		const selector = {};
 		selector.owner = { $eq: Meteor.userId()};
 		selector.poolId = { $eq: poolId };
@@ -162,21 +163,14 @@ class TestResultController {
 		const selector = {};
 		selector.owner = { $eq: Meteor.userId()};
 		selector._id = { $eq: id };
-		let result = TestResults.findOne(selector);
-		
-		/*let newObjectId = new Mongo.Collection.ObjectID();
-		newObjectId._str = id;
-		let result = TestResults.findOne({_id: newObjectId._str});
-		*/
-		
+		let result = TestResults.findOne(selector);		
 		
 		if (result) {
 			this.isNew = false;
 			this.facNumberOfDrops = result.freeChlorine / .5;
 			this.ccNumberOfDrops = result.combinedChlorine / .5;
 			this.taNumberOfDrops = result.totalAlkalinity / 10;
-			this.chNumberOfDrops = result.calciumHardness / 25;
-			//this.calculateChemicals(result);
+			this.chNumberOfDrops = result.calciumHardness / 25;		
 			return result;
 		} else {
 			console.log('Could not load ID ' + id);
