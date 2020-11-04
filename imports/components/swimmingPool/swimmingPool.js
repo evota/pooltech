@@ -21,7 +21,7 @@ class SwimmingPoolController{
 		}else{
 			this.pool = {};
 		}	
-		this.mapURL = Meteor.settings.public.googleMapsAPI;
+		this.mapURL = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAkNRrGEWqMPjAz8aaR18oxdCUS6TbkG4I';
 		this.states = ('AL AK AZ AR CA CO CT DE FL GA HI ID IL IN IA KS KY LA ME MD MA MI MN MS ' +
 		            'MO MT NE NV NH NJ NM NY NC ND OH OK OR PA RI SC SD TN TX UT VT VA WA WV WI ' +
 		            'WY').split(' ').map(function (state) { return { abbrev: state }; });
