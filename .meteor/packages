@@ -4,25 +4,25 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-base@1.4.0             # Packages every Meteor app needs to have
-mobile-experience@1.0.5       # Packages for a great mobile UX
-mongo@1.6.2                   # The database Meteor supports right now
-reactive-var@1.0.11            # Reactive variable for tracker
+meteor-base@1.5.1             # Packages every Meteor app needs to have
+mobile-experience@1.1.0       # Packages for a great mobile UX
+mongo@1.16.6                   # The database Meteor supports right now
+reactive-var@1.0.12            # Reactive variable for tracker
 jquery@1.11.10                  # Helpful client-side library
-tracker@1.2.0                 # Meteor's client-side reactive programming library
+tracker@1.3.2                 # Meteor's client-side reactive programming library
 
-standard-minifier-css@1.5.3   # CSS minifier run for production mode
+standard-minifier-css@1.9.2   # CSS minifier run for production mode
 es5-shim@4.8.0                # ECMAScript 5 compatibility for older browsers.
-ecmascript@0.12.4              # Enable ECMAScript2015+ syntax in app code
+ecmascript@0.16.7              # Enable ECMAScript2015+ syntax in app code
 
 angular-templates
-accounts-password@1.5.1
+accounts-password@2.3.4
 dotansimha:accounts-ui-angular
-accounts-google@1.3.2
+accounts-google@1.4.0
 planettraining:material-design-icons
-shell-server@0.4.0
-google-config-ui@1.0.1
-dynamic-import@0.5.1
+shell-server@0.5.0
+google-config-ui@1.0.3
+dynamic-import@0.7.3
 wormy:angularjs-google-maps
 msavin:mongol
-underscore@1.0.10
+underscore@1.0.13
